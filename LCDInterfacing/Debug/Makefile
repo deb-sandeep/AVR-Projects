@@ -28,18 +28,14 @@ AVR_APP_PATH :=$$$AVR_APP_PATH$$$
 QUOTE := "
 ADDITIONAL_DEPENDENCIES:=
 OUTPUT_FILE_DEP:=
-LIB_DEP:=
-LINKER_SCRIPT_DEP:=
 
 # Every subdirectory with source files must be described here
-SUBDIRS :=  \
-../include \
-../src
+SUBDIRS := 
 
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
-../src/main.c
+../main.c
 
 
 PREPROCESSING_SRCS += 
@@ -49,40 +45,38 @@ ASM_SRCS +=
 
 
 OBJS +=  \
-src/main.o
+main.o
+
 
 OBJS_AS_ARGS +=  \
-src/main.o
+main.o
+
 
 C_DEPS +=  \
-src/main.d
+main.d
+
 
 C_DEPS_AS_ARGS +=  \
-src/main.d
+main.d
 
-OUTPUT_FILE_PATH +=AVR-LCDInterfacing.elf
 
-OUTPUT_FILE_PATH_AS_ARGS +=AVR-LCDInterfacing.elf
+OUTPUT_FILE_PATH +=main.elf
+
+OUTPUT_FILE_PATH_AS_ARGS +=main.elf
 
 ADDITIONAL_DEPENDENCIES:=
 
 OUTPUT_FILE_DEP:= ./makedep.mk
 
-LIB_DEP+= 
-
-LINKER_SCRIPT_DEP+= 
-
-
 # AVR32/GNU C Compiler
 
 
 
-src/%.o: ../src/%.c
+./%.o: .././%.c
 	@echo Building file: $<
-	@echo Invoking: AVR/GNU C Compiler : 5.4.0
-	$(QUOTE)D:\softwares\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"D:\softwares\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.132\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega16a -B "D:\softwares\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.132\gcc\dev\atmega16a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Invoking: AVR/GNU C Compiler : (AVR_8_bit_GNU_Toolchain_3.4.1_830) 4.6.2
+	$(QUOTE)C:\Program Files\Atmel\Atmel Studio 6.0\extensions\Atmel\AVRGCC\3.4.1.95\AVRToolchain\bin\avr-gcc.exe$(QUOTE) -funsigned-char -funsigned-bitfields -O1 -fpack-struct -fshort-enums -g2 -Wall -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"  -mmcu=atmega16a   -o"$@" "$<" 
 	@echo Finished building: $<
-	
 
 
 
@@ -106,17 +100,16 @@ endif
 # All Target
 all: $(OUTPUT_FILE_PATH) $(ADDITIONAL_DEPENDENCIES)
 
-$(OUTPUT_FILE_PATH): $(OBJS) $(USER_OBJS) $(OUTPUT_FILE_DEP) $(LIB_DEP) $(LINKER_SCRIPT_DEP)
+$(OUTPUT_FILE_PATH): $(OBJS) $(USER_OBJS) $(OUTPUT_FILE_DEP)
 	@echo Building target: $@
-	@echo Invoking: AVR/GNU Linker : 5.4.0
-	$(QUOTE)D:\softwares\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE) -o$(OUTPUT_FILE_PATH_AS_ARGS) $(OBJS_AS_ARGS) $(USER_OBJS) $(LIBS) -Wl,-Map="AVR-LCDInterfacing.map" -Wl,--start-group -Wl,-lm  -Wl,--end-group -Wl,--gc-sections -mmcu=atmega16a -B "D:\softwares\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.132\gcc\dev\atmega16a"  
+	@echo Invoking: AVR/GNU Linker : (AVR_8_bit_GNU_Toolchain_3.4.1_830) 4.6.2
+	$(QUOTE)C:\Program Files\Atmel\Atmel Studio 6.0\extensions\Atmel\AVRGCC\3.4.1.95\AVRToolchain\bin\avr-gcc.exe$(QUOTE) -o$(OUTPUT_FILE_PATH_AS_ARGS) $(OBJS_AS_ARGS) $(USER_OBJS) $(LIBS) -Wl,-Map="main.map" -Wl,--start-group -Wl,-lm  -Wl,--end-group  -mmcu=atmega16a  
 	@echo Finished building target: $@
-	"D:\softwares\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O ihex -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures  "AVR-LCDInterfacing.elf" "AVR-LCDInterfacing.hex"
-	"D:\softwares\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -j .eeprom  --set-section-flags=.eeprom=alloc,load --change-section-lma .eeprom=0  --no-change-warnings -O ihex "AVR-LCDInterfacing.elf" "AVR-LCDInterfacing.eep" || exit 0
-	"D:\softwares\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objdump.exe" -h -S "AVR-LCDInterfacing.elf" > "AVR-LCDInterfacing.lss"
-	"D:\softwares\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O srec -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures "AVR-LCDInterfacing.elf" "AVR-LCDInterfacing.srec"
-	"D:\softwares\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-size.exe" "AVR-LCDInterfacing.elf"
-	
+	"C:\Program Files\Atmel\Atmel Studio 6.0\extensions\Atmel\AVRGCC\3.4.1.95\AVRToolchain\bin\avr-objcopy.exe" -O ihex -R .eeprom -R .fuse -R .lock -R .signature  "main.elf" "main.hex"
+	"C:\Program Files\Atmel\Atmel Studio 6.0\extensions\Atmel\AVRGCC\3.4.1.95\AVRToolchain\bin\avr-objcopy.exe" -j .eeprom  --set-section-flags=.eeprom=alloc,load --change-section-lma .eeprom=0  --no-change-warnings -O ihex "main.elf" "main.eep" || exit 0
+	"C:\Program Files\Atmel\Atmel Studio 6.0\extensions\Atmel\AVRGCC\3.4.1.95\AVRToolchain\bin\avr-objdump.exe" -h -S "main.elf" > "main.lss"
+	"C:\Program Files\Atmel\Atmel Studio 6.0\extensions\Atmel\AVRGCC\3.4.1.95\AVRToolchain\bin\avr-objcopy.exe" -O srec -R .eeprom -R .fuse -R .lock -R .signature  "main.elf" "main.srec"
+	"C:\Program Files\Atmel\Atmel Studio 6.0\extensions\Atmel\AVRGCC\3.4.1.95\AVRToolchain\bin\avr-size.exe" "main.elf"
 	
 
 
@@ -125,7 +118,6 @@ $(OUTPUT_FILE_PATH): $(OBJS) $(USER_OBJS) $(OUTPUT_FILE_DEP) $(LIB_DEP) $(LINKER
 
 # Other Targets
 clean:
-	-$(RM) $(OBJS_AS_ARGS) $(EXECUTABLES)  
-	-$(RM) $(C_DEPS_AS_ARGS)   
-	rm -rf "AVR-LCDInterfacing.elf" "AVR-LCDInterfacing.a" "AVR-LCDInterfacing.hex" "AVR-LCDInterfacing.lss" "AVR-LCDInterfacing.eep" "AVR-LCDInterfacing.map" "AVR-LCDInterfacing.srec" "AVR-LCDInterfacing.usersignatures"
+	-$(RM) $(OBJS_AS_ARGS)$(C_DEPS_AS_ARGS) $(EXECUTABLES) 
+	rm -rf "main.elf" "main.a" "main.hex" "main.lss" "main.eep" "main.map" "main.srec"
 	
