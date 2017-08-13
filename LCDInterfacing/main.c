@@ -48,6 +48,7 @@ void turnProgressWheel(void) {
 
 void initScreen(void) {
 	writeStringToLCDatRC( 0, 0, "Count = " ) ;
+	writeStringToLCDatRC( 1, 0, "Hello" ) ;
 }
 
 int main(void) {

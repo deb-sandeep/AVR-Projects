@@ -174,6 +174,8 @@ void initLCD() {
 	writeCommandToLCD( 0x0C ) ; // Display on, cursor on, blink off
 	writeCommandToLCD( 0x06 ) ; // Increment cursor and don't shift screen
 	writeCommandToLCD( 0x01 ) ; // Clear screen
+	
+	_delay_ms(10) ;
 }
 
 /** 

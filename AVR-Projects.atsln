@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Atmel Studio Solution File, Format Version 11.00
 Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "LCDInterfacing", "LCDInterfacing\LCDInterfacing.cproj", "{95C7EC34-4AF6-4481-A4D8-1301437AB0D5}"
 EndProject
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "Debounce", "Debounce\Debounce.cproj", "{1F5B58F9-BED4-4156-8F20-7E6F000C57F9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|AVR = Debug|AVR
@@ -13,6 +15,10 @@ Global
 		{95C7EC34-4AF6-4481-A4D8-1301437AB0D5}.Debug|AVR.Build.0 = Debug|AVR
 		{95C7EC34-4AF6-4481-A4D8-1301437AB0D5}.Release|AVR.ActiveCfg = Release|AVR
 		{95C7EC34-4AF6-4481-A4D8-1301437AB0D5}.Release|AVR.Build.0 = Release|AVR
+		{1F5B58F9-BED4-4156-8F20-7E6F000C57F9}.Debug|AVR.ActiveCfg = Debug|AVR
+		{1F5B58F9-BED4-4156-8F20-7E6F000C57F9}.Debug|AVR.Build.0 = Debug|AVR
+		{1F5B58F9-BED4-4156-8F20-7E6F000C57F9}.Release|AVR.ActiveCfg = Release|AVR
+		{1F5B58F9-BED4-4156-8F20-7E6F000C57F9}.Release|AVR.Build.0 = Release|AVR
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
